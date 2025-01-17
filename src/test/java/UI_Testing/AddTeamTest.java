@@ -18,10 +18,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class AddTeamTest {
     private WebDriver driver;
     private TeamsPage teamsPage;
+    private EventTypesPage eventTypesPage;
     private String teamName = "testAddTeam";
 
+
     @BeforeEach
-    public void setUp() throws MalformedURLException {
+    public void setUp() throws MalformedURLException, InterruptedException {
         // Initialize WebDriver
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -59,47 +61,33 @@ public class AddTeamTest {
         // Add Member 2
         addTeamMembersPage.addMember("member2@gmail.com","Member");
         Thread.sleep(1000);
-        // Add Member 3
-        //addTeamMembersPage.addMember("member3@gmail.com","Owner");
         addTeamMembersPage.clickContinue();
 
+        //Step 5 : Add new team event
         AddNewTeamEvent addNewTeamEvent=new AddNewTeamEvent(driver);
         addNewTeamEvent.fillNewTeamEvent("test","ROUND_ROBIN");
 
+        //Step 6 : Go back to event type page
         TeamProfile teamProfile=new TeamProfile(driver);
         teamProfile.clickBackButton();
 
+        //Step 7 : Go to teams page
         eventTypesPage.navigateToTeamsPage();
         Thread.sleep(1000);
+
+        //Step 8 : Check if team exists
         assertTrue(teamsPage.isTeamExists(teamName));
 
-        teamsPage.removeTeamMember(teamName);
+
     }
-
-    @Test
-    public void testExistTeamTitle(){
-        teamName="testExist";
-        //Step1: navigate To Teams Page
-        EventTypesPage EventTypesPage=new EventTypesPage(driver);
-        EventTypesPage.navigateToTeamsPage();
-
-        // Step 2: Click Add New Team
-        TeamsPage TeamsPage=new TeamsPage(driver);
-        TeamsPage.clickAddNewTeam();
-
-        // Step 3: Create a new team
-        CreateTeamPage createTeamPage = new CreateTeamPage(driver);
-        createTeamPage.setTeamName(teamName);
-        createTeamPage.clickContinue();
-        assertEquals("This URL is already taken",createTeamPage.getErrorMessageForExistTeamTitle());
-    }
-
 
     @AfterEach
     public void tearDown() {
         TeamsPage teamsPage=new TeamsPage(driver);
         if (driver != null) {
-            //teamsPage.removeTeamMember(teamName);
+            if(teamsPage.isTeamExists(teamName)){
+                teamsPage.removeTeam(teamName);
+            }
             driver.quit();
         }
     }

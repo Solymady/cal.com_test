@@ -2,6 +2,7 @@ package UI_Testing;
 
 import org.example.pages.EventTypesPage;
 import org.example.pages.LoginPage;
+import org.example.pages.team.CreateTeamPage;
 import org.example.pages.team.TeamsPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,13 +10,13 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+public class TeamNameExistTest {
 
-public class RemoveTeamTest {
     private WebDriver driver;
     private LoginPage loginPage;
-    private String removeTeam ="removeTeam";
+    private String testExist = "testExist";
 
     @BeforeEach
     public void setUp() {
@@ -31,27 +32,33 @@ public class RemoveTeamTest {
         EventTypesPage eventTypesPage = new EventTypesPage(driver);
         eventTypesPage.navigateToTeamsPage();
         TeamsPage teamsPage=new TeamsPage(driver);
-        teamsPage.addTeam(removeTeam);
+        teamsPage.addTeam(testExist);
     }
 
-
     @Test
-    public void removeTeamTest() throws InterruptedException {
+    public void testExistTeamTitle(){
         //Step1: navigate To Teams Page
-        EventTypesPage eventTypesPage = new EventTypesPage(driver);
+        EventTypesPage eventTypesPage=new EventTypesPage(driver);
         eventTypesPage.navigateToTeamsPage();
-        //remove team
-        TeamsPage teamsPage=new TeamsPage(driver);
-        Thread.sleep(1000);
-        teamsPage.removeTeam(removeTeam);
-        Thread.sleep(1000);
-        assertTrue(!teamsPage.isTeamExists(removeTeam));
 
+        // Step 2: Click Add New Team
+        TeamsPage teamsPage=new TeamsPage(driver);
+        teamsPage.clickAddNewTeam();
+
+        // Step 3: Create a new team
+        CreateTeamPage createTeamPage = new CreateTeamPage(driver);
+        createTeamPage.setTeamName(testExist);
+        createTeamPage.clickContinue();
+        assertEquals("This URL is already taken",createTeamPage.getErrorMessageForExistTeamTitle());
     }
 
     @AfterEach
     public void tearDown() {
         if (driver != null) {
+            CreateTeamPage createTeamPage=new CreateTeamPage(driver);
+            createTeamPage.clickCancel();
+            TeamsPage teamsPage=new TeamsPage(driver);
+            teamsPage.removeTeam(testExist);
             driver.quit();
         }
     }

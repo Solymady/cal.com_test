@@ -1,5 +1,6 @@
 package org.example.pages.team;
 
+import org.example.pages.EventTypesPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -90,12 +91,8 @@ public class TeamsPage {
         return false; // Return false if no match is found
     }
 
-
-
-
-
     // Remove team member by name
-    public boolean removeTeamMember(String name) {
+    public boolean removeTeam(String name) {
         boolean isTeamExists=isTeamExists(name);
 
         if (isTeamExists) {
@@ -111,5 +108,19 @@ public class TeamsPage {
         }
         return false;
     }
+
+    public void addTeam(String teamName){
+        clickAddNewTeam();
+        CreateTeamPage createTeamPage= new CreateTeamPage(driver);
+        createTeamPage.setTeamName(teamName);
+        createTeamPage.clickContinue();
+        AddTeamMembersPage addTeamMembersPage=new AddTeamMembersPage(driver);
+        addTeamMembersPage.clickContinue();
+        AddNewTeamEvent addNewTeamEvent=new AddNewTeamEvent(driver);
+        addNewTeamEvent.clickdoLaterButton();
+        TeamProfile teamProfile=new TeamProfile(driver);
+        teamProfile.clickBackButton();
+    }
+
 
 }

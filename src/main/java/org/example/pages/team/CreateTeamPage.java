@@ -15,6 +15,7 @@ public class CreateTeamPage {
     private By teamNameField = By.cssSelector("[data-testid='team-name']");
     private By continueButton = By.cssSelector("[data-testid='continue-button']");
     private By paragraphSelector = By.cssSelector("div[data-testid='field-error'] > p");
+    private  By cancelButton= By.xpath("//button[text()='Cancel']");
 
     // Constructor
     public CreateTeamPage(WebDriver driver) {
@@ -33,6 +34,13 @@ public class CreateTeamPage {
     public void clickContinue() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement continueBtn = wait.until(ExpectedConditions.elementToBeClickable(continueButton));
+        continueBtn.click();
+    }
+
+    // Click the Continue button
+    public void clickCancel() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement continueBtn = wait.until(ExpectedConditions.elementToBeClickable(cancelButton));
         continueBtn.click();
     }
 

@@ -46,6 +46,7 @@ public class EventTypesPage {
         WebElement teamsLink = wait.until(ExpectedConditions.elementToBeClickable(teamsLinkBy));
         teamsLink.click();
         wait.until(ExpectedConditions.urlContains(teamsPageUrl));
+
         return new TeamsPage(driver);
     }
 
