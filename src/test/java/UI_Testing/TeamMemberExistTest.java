@@ -9,11 +9,19 @@ import org.example.pages.team.TeamsPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.MalformedURLException;
+import java.time.Duration;
 
+import static org.example.DriverFactory.getDriver;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TeamMemberExistTest {
@@ -27,9 +35,17 @@ public class TeamMemberExistTest {
     @BeforeEach
     public void setUp() throws MalformedURLException, InterruptedException {
         // Initialize WebDriver
-        driver = new ChromeDriver();
+        driver = getDriver();
         driver.manage().window().maximize();
-        driver.get("http://localhost:3000/auth/login");
+        driver.get("https://397e-2a06-c701-7aa2-8800-e8d6-ed49-b4e-cd59.ngrok-free.app");
+
+        try {
+            Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            WebElement visitSiteButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Visit Site']")));
+            visitSiteButton.click();
+        } catch (TimeoutException err) {
+            System.out.println("Ngrok warning page was not loaded");
+        }
 
         // Login
         LoginPage loginPage = new LoginPage(driver);
