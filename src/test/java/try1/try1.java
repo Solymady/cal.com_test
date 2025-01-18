@@ -36,6 +36,12 @@ public class try1 {
     public void setUp() throws MalformedURLException, InterruptedException {
         // Initialize WebDriver
         driver = getDriver();
+
+        if (driver != null) {
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        } else {
+            System.out.println("Driver is null");
+        }
         driver.manage().window().maximize();
         driver.get("https://397e-2a06-c701-7aa2-8800-e8d6-ed49-b4e-cd59.ngrok-free.app");
 
@@ -59,6 +65,7 @@ public class try1 {
 
         // Navigate to Teams page
         teamsPage = new TeamsPage(driver);
+
     }
 
     @Test
