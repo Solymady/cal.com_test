@@ -26,7 +26,7 @@ public class RemoveTeamTest {
 
         // Login
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.loginAsValidUser("solyma.mady@hotmail.co.il", "Solyma315087817");
+        loginPage.loginAsValidUser("solyma.mady@hotmail.co.il", "Admin123456789admin");
 
         EventTypesPage eventTypesPage = new EventTypesPage(driver);
         eventTypesPage.navigateToTeamsPage();

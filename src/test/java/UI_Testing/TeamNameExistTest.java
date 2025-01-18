@@ -27,7 +27,7 @@ public class TeamNameExistTest {
 
         // Login
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.loginAsValidUser("solyma.mady@hotmail.co.il", "Solyma315087817");
+        loginPage.loginAsValidUser("solyma.mady@hotmail.co.il", "Admin123456789admin");
 
         EventTypesPage eventTypesPage = new EventTypesPage(driver);
         eventTypesPage.navigateToTeamsPage();
@@ -53,11 +53,12 @@ public class TeamNameExistTest {
     }
 
     @AfterEach
-    public void tearDown() {
+    public void tearDown() throws InterruptedException {
         if (driver != null) {
             CreateTeamPage createTeamPage=new CreateTeamPage(driver);
             createTeamPage.clickCancel();
             TeamsPage teamsPage=new TeamsPage(driver);
+            Thread.sleep(1000);
             teamsPage.removeTeam(testExist);
             driver.quit();
         }

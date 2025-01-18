@@ -66,30 +66,35 @@ public class TeamsPage {
     public boolean isTeamExists(String expectedText) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        // Wait for all <ul> elements to be visible
-        List<WebElement> ulElements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.tagName("ul")));
+        try {
+            // Wait for all <ul> elements to be visible
+            List<WebElement> ulElements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.tagName("ul")));
 
-        // Iterate through each <ul>
-        for (WebElement ul : ulElements) {
-            // Locate all <li> elements within the current <ul>
-            List<WebElement> liElements = ul.findElements(By.tagName("li"));
+            // Iterate through each <ul>
+            for (WebElement ul : ulElements) {
+                // Locate all <li> elements within the current <ul>
+                List<WebElement> liElements = ul.findElements(By.tagName("li"));
 
-            // Iterate through each <li>
-            for (WebElement li : liElements) {
-                // Check if the <li> contains a <span> with the desired class and text
-                List<WebElement> spanElements = li.findElements(By.cssSelector("span.text-default.text-sm.font-bold"));
+                // Iterate through each <li>
+                for (WebElement li : liElements) {
+                    // Check if the <li> contains a <span> with the desired class and text
+                    List<WebElement> spanElements = li.findElements(By.cssSelector("span.text-default.text-sm.font-bold"));
 
-                // If the <span> exists, check its text
-                if (!spanElements.isEmpty() && spanElements.get(0).getText().equals(expectedText)) {
-                    System.out.println("Found matching team: " + expectedText);
-                    return true; // Return true if a match is found
+                    // If the <span> exists, check its text
+                    if (!spanElements.isEmpty() && spanElements.get(0).getText().equals(expectedText)) {
+                        System.out.println("Found matching team: " + expectedText);
+                        return true; // Return true if a match is found
+                    }
                 }
             }
+        } catch (Exception e) {
+            System.out.println("No <ul> elements found on the page.");
         }
 
-        System.out.println("No matching team found for: " + expectedText);
-        return false; // Return false if no match is found
+        System.out.println("No matching team found: " + expectedText);
+        return false; // Return false if no match is found or no <ul>/<li> elements exist
     }
+
 
     // Remove team member by name
     public boolean removeTeam(String name) {

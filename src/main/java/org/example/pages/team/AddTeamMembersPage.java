@@ -25,6 +25,8 @@ public class AddTeamMembersPage {
     private By memberSelector = By.id("react-select-2-option-0");
     private By adminSelector = By.id("react-select-2-option-1");
     private By ownerSelector = By.id("react-select-2-option-2");
+    private By SuccessMessageAddTeamMember=By.cssSelector("p[data-testid='toast-success']");
+    private By memberExistMessage=By.xpath("//span[text()='Member has already been invited']");
 
 
 
@@ -35,6 +37,8 @@ public class AddTeamMembersPage {
     }
 
 
+
+
     public void enterEmail(String email) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(emailFieldBy));
@@ -42,9 +46,26 @@ public class AddTeamMembersPage {
         emailField.sendKeys(email);
     }
 
+    public String getSuccessMessageAddTeamMember() {
+        // Create WebDriverWait instance (e.g., wait up to 10 seconds)
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        // Wait until the success message element is visible
+        WebElement successMessage = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(SuccessMessageAddTeamMember));
+        // Return the text of the success message
+        return successMessage.getText();
+    }
+
+    // Method to get the text of the error message for exist team title
+    public String getErrorMessageForExistTeamMember() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement errorMessageElement = wait.until(ExpectedConditions.visibilityOfElementLocated(memberExistMessage));
+        return errorMessageElement.getText();
+    }
+
 
     public Boolean selectRole(String option) throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(1000);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         Actions actions = new Actions(driver);
 
@@ -73,8 +94,6 @@ public class AddTeamMembersPage {
         return true;
     }
 
-
-
     // Click "Send Invite" button
     public void clickSendInvite() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -96,11 +115,10 @@ public class AddTeamMembersPage {
         new Actions(driver)
                 .moveToElement(hoverable)
                 .click(hoverable).perform();
-       // addTeamMemberButton.
-        //addTeamMemberButton.click();
     }
 
     public void addMember(String email,String role) throws InterruptedException {
+        Thread.sleep(1000);
         clickAddTeamMember();
         enterEmail(email);
         selectRole(role);

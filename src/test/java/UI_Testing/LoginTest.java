@@ -32,7 +32,7 @@ public class LoginTest {
 
     @Test
     public void testEventTypesPageHeader() {
-        EventTypesPage eventTypesPage = loginPage.loginAsValidUser("solyma.mady@hotmail.co.il", "Solyma315087817");
+        EventTypesPage eventTypesPage = loginPage.loginAsValidUser("solyma.mady@hotmail.co.il", "Admin123456789admin");
 
         // Wait for login
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

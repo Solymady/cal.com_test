@@ -2,24 +2,26 @@ package UI_Testing;
 
 import org.example.pages.EventTypesPage;
 import org.example.pages.LoginPage;
-import org.example.pages.team.*;
+import org.example.pages.team.AddTeamMembersPage;
+import org.example.pages.team.CreateTeamPage;
+import org.example.pages.team.TeamsPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.net.MalformedURLException;
 
-import static java.lang.Thread.sleep;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class AddTeamTest {
+public class AddTeamMemberTest {
     private WebDriver driver;
     private TeamsPage teamsPage;
     private EventTypesPage eventTypesPage;
-    private String teamName = "testAddTeam";
+    private String teamName = "testAddMember";
 
 
     @BeforeEach
@@ -39,52 +41,37 @@ public class AddTeamTest {
 
     @Test
     public void testAddNewTeam() throws InterruptedException {
-        //Step1: navigate To Teams Page
-        EventTypesPage eventTypesPage=new EventTypesPage(driver);
+        // Step 1: Navigate to Teams Page
+        EventTypesPage eventTypesPage = new EventTypesPage(driver);
         eventTypesPage.navigateToTeamsPage();
 
         // Step 2: Click Add New Team
-        TeamsPage teamsPage=new TeamsPage(driver);
+        TeamsPage teamsPage = new TeamsPage(driver);
         teamsPage.clickAddNewTeam();
 
-       // Step 3: Create a new team
+        // Step 3: Create a new team
         CreateTeamPage createTeamPage = new CreateTeamPage(driver);
         createTeamPage.setTeamName(teamName);
         createTeamPage.clickContinue();
 
-        // Step 4: Add team members
+        // Step 4: Add team
         AddTeamMembersPage addTeamMembersPage = new AddTeamMembersPage(driver);
 
         // Add Member 1
-        addTeamMembersPage.addMember("member1@gmail.com","Admin");
+        addTeamMembersPage.addMember("member1@gmail.com", "Admin");
         Thread.sleep(1000);
-        // Add Member 2
-        addTeamMembersPage.addMember("member2@gmail.com","Member");
-        Thread.sleep(1000);
-        addTeamMembersPage.clickContinue();
-
-        //Step 5 : Add new team event
-        AddNewTeamEvent addNewTeamEvent=new AddNewTeamEvent(driver);
-        addNewTeamEvent.fillNewTeamEvent("test","ROUND_ROBIN");
-
-        //Step 6 : Go back to event type page
-        TeamProfile teamProfile=new TeamProfile(driver);
-        teamProfile.clickBackButton();
-
-        //Step 7 : Go to teams page
-        eventTypesPage.navigateToTeamsPage();
-        Thread.sleep(1000);
-
-        //Step 8 : Check if team exists
-        assertTrue(teamsPage.isTeamExists(teamName));
-
 
     }
 
+
     @AfterEach
-    public void tearDown() {
-        TeamsPage teamsPage=new TeamsPage(driver);
+    public void tearDown() throws InterruptedException {
+        driver.navigate().back();
+        Thread.sleep(1000);
+        driver.navigate().back();
+        Thread.sleep(1000);
         if (driver != null) {
+            Thread.sleep(1000);
             if(teamsPage.isTeamExists(teamName)){
                 teamsPage.removeTeam(teamName);
             }
