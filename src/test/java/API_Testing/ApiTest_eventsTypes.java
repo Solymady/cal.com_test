@@ -29,6 +29,7 @@ public class ApiTest_eventsTypes {
     @BeforeEach
     public void setup() {
         RestAssured.baseURI = BASE_URL;
+        RestAssured.useRelaxedHTTPSValidation();
         removeEventId =createEventType("removeEvent","remove");
         getEventId =createEventType("getEvent","get");
     }
@@ -128,26 +129,6 @@ public class ApiTest_eventsTypes {
         assertEquals(-1, duplicateEventId, "Expected duplicate event creation to fail, but it succeeded.");
     }
 
-
-    private int createEventTypeWithRetry(String title, String slug) {
-        int retries = 3; // Number of retries
-        int waitTime = 2000; // Wait time between retries in milliseconds
-
-        for (int i = 0; i < retries; i++) {
-            int eventId = createEventType(title, slug);
-            if (eventId > 0 || eventId == -1) {
-                return eventId; // Success or expected failure
-            }
-            try {
-                System.out.println("Retrying after rate limit... (" + (i + 1) + "/" + retries + ")");
-                Thread.sleep(waitTime); // Wait before retrying
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-        }
-        throw new RuntimeException("Failed to create event after " + retries + " attempts due to rate limits.");
-    }
-
     @Test
     public void testDeleteNonExistentEventType() {
         // Define a non-existent event ID
@@ -182,7 +163,24 @@ public class ApiTest_eventsTypes {
         }
     }
 
+    private int createEventTypeWithRetry(String title, String slug) {
+        int retries = 3; // Number of retries
+        int waitTime = 2000; // Wait time between retries in milliseconds
 
+        for (int i = 0; i < retries; i++) {
+            int eventId = createEventType(title, slug);
+            if (eventId > 0 || eventId == -1) {
+                return eventId; // Success or expected failure
+            }
+            try {
+                System.out.println("Retrying after rate limit... (" + (i + 1) + "/" + retries + ")");
+                Thread.sleep(waitTime); // Wait before retrying
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        throw new RuntimeException("Failed to create event after " + retries + " attempts due to rate limits.");
+    }
 
     public int createEventType(String title, String slug) {
         // Construct the JSON request body using parameters
