@@ -37,11 +37,7 @@ public class try1 {
         // Initialize WebDriver
         driver = getDriver();
 
-        if (driver != null) {
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        } else {
-            System.out.println("Driver is null");
-        }
+
         driver.manage().window().maximize();
         driver.get("https://397e-2a06-c701-7aa2-8800-e8d6-ed49-b4e-cd59.ngrok-free.app");
 
@@ -55,17 +51,47 @@ public class try1 {
 
 
         eventTypesPage = new EventTypesPage(driver);
+        if (driver != null) {
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        } else {
+            System.out.println("Driver is null");
+        }
         teamsPage = new TeamsPage(driver);
+        if (driver != null) {
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        } else {
+            System.out.println("Driver is null");
+        }
         createTeamPage= new CreateTeamPage(driver);
+        if (driver != null) {
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        } else {
+            System.out.println("Driver is null");
+        }
         addTeamMembersPage= new AddTeamMembersPage(driver);
+        if (driver != null) {
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        } else {
+            System.out.println("Driver is null");
+        }
 
         // Login
         LoginPage loginPage = new LoginPage(driver);
+        if (driver != null) {
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        } else {
+            System.out.println("Driver is null");
+        }
         loginPage.loginAsValidUser("solyma.mady@hotmail.co.il", "Admin123456789admin");
 
         // Navigate to Teams page
         teamsPage = new TeamsPage(driver);
 
+        if (driver != null) {
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        } else {
+            System.out.println("Driver is null");
+        }
     }
 
     @Test
