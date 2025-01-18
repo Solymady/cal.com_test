@@ -29,6 +29,7 @@ public class try1 {
     private EventTypesPage eventTypesPage;
     private String teamName = "testAddMember";
     private CreateTeamPage createTeamPage;
+    AddTeamMembersPage addTeamMembersPage;
 
 
     @BeforeEach
@@ -45,6 +46,12 @@ public class try1 {
         } catch (TimeoutException err) {
             System.out.println("Ngrok warning page was not loaded");
         }
+
+
+        eventTypesPage = new EventTypesPage(driver);
+        teamsPage = new TeamsPage(driver);
+        createTeamPage= new CreateTeamPage(driver);
+        addTeamMembersPage= new AddTeamMembersPage(driver);
 
         // Login
         LoginPage loginPage = new LoginPage(driver);
@@ -70,7 +77,7 @@ public class try1 {
         createTeamPage.clickContinue();
 
         // Step 4: Add team
-        AddTeamMembersPage addTeamMembersPage = new AddTeamMembersPage(driver);
+        addTeamMembersPage = new AddTeamMembersPage(driver);
 
         // Add Member 1
         addTeamMembersPage.addMember("member1@gmail.com", "Admin");
