@@ -2,6 +2,7 @@ package API_Testing;
 
 
 
+import UI_Testing.TestData;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -17,10 +18,10 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class ApiTest_eventsTypes {
+public class ApiTest_eventsTypes{
 
     private final String BASE_URL = "https://api.cal.com/v1";
-    private final String API_KEY = "cal_live_2725c576aa5eb86fbfc552fa289b916e";
+    private final String API_KEY = TestData.API_KEY;
     private int removeEventId;
     private int getEventId;
     private int addedEventId;

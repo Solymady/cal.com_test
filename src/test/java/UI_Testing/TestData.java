@@ -16,7 +16,7 @@ public class TestData {
 
     // API
     public static final String LOCAL_BASE_API_URL = "https://api.cal.com/v1";
-    public static final String API_KEY ="cal_live_2725c576aa5eb86fbfc552fa289b916e";
+    public static final String API_KEY = "cal_live_40be6ac9f6068aa86e1bdbef1f845a79";
 
     //Login test valid data
     public static final String VALID_EMAIL ="solyma.mady@hotmail.co.il";
