@@ -70,4 +70,9 @@ To run these tests, ensure the following prerequisites are met:
 4. **Run the tests:**
    ```bash
    npm test
+<br>
 
+### Notes
+- **ngrok Setup**: Ensure you have **ngrok** installed and configured if you plan to expose the local server for GitHub workflows. You can download it from [ngrok's official site](https://ngrok.com/).
+- **WebDriver for UI Tests**: For Selenium-based UI tests, verify that the appropriate WebDriver (e.g., ChromeDriver) is installed and compatible with your browser version.
+- **API Key Security**: Keep the API key (`cal_live_...`) secure and avoid committing sensitive information directly to public repositories.
