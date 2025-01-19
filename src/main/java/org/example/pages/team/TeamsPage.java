@@ -43,26 +43,13 @@ public class TeamsPage {
 
 
     // Click the "Add New Team" button
-    public boolean clickAddNewTeam() {
-        try {
-            // Locate and click the button
+    public boolean clickAddNewTeam() throws InterruptedException {
             Thread.sleep(10000);
             WebElement newTeamButton = driver.findElement(addNewTeamButtonBy);
+             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", newTeamButton);
+            Thread.sleep(10000);
             newTeamButton.click();
             return true; // Return true if the click was successful
-        } catch (Exception e) {
-            try {
-                // Capture screenshot on failure
-                File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-                File destination = new File("test-results/screenshots/screenshot_error.png");
-                FileUtils.copyFile(screenshot, destination);
-                System.out.println("Screenshot saved to: " + destination.getAbsolutePath());
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-            e.printStackTrace();
-            return false; // Return false if an exception occurred
-        }
     }
 
 
@@ -131,7 +118,7 @@ public class TeamsPage {
         return false;
     }
 
-    public void addTeam(String teamName){
+    public void addTeam(String teamName) throws InterruptedException {
         clickAddNewTeam();
         CreateTeamPage createTeamPage= new CreateTeamPage(driver);
         createTeamPage.setTeamName(teamName);

@@ -28,7 +28,7 @@ public class TeamNameExistTest {
     private String testExist = "testExist";
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws InterruptedException {
         // Initialize WebDriver
         driver = getDriver();
         driver.manage().window().maximize();
@@ -53,7 +53,7 @@ public class TeamNameExistTest {
     }
 
     @Test
-    public void testExistTeamTitle(){
+    public void testExistTeamTitle() throws InterruptedException {
         //Step1: navigate To Teams Page
         EventTypesPage eventTypesPage=new EventTypesPage(driver);
         eventTypesPage.navigateToTeamsPage();
