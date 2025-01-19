@@ -38,15 +38,8 @@ public class ApiTest_eventsTypes {
     @Test
     public void testValidateApiKey() {
         // Send a simple GET request to validate the API key
-        Response response = given()
-                .baseUri(BASE_URL)
-                .queryParam("apiKey", API_KEY)
-                .when()
+        Response response = given().header("Authorization", API_KEY).when()
                 .get("/event-types"); // Adjust endpoint as needed
-
-        // Print the response for debugging
-        System.out.println("Response Status Code: " + response.statusCode());
-        System.out.println("Response Body: " + response.asString());
 
         // Validate the status code
         assertEquals(200, response.statusCode(), "Expected status code 200 but got " + response.statusCode());
@@ -64,10 +57,6 @@ public class ApiTest_eventsTypes {
                 .when()
                 .get("/event-types");
 
-        // Print the response for debugging
-        System.out.println("Response Status Code: " + response.statusCode());
-        System.out.println("Response Body: " + response.asString());
-
         // Validate the status code
         assertEquals(200, response.statusCode(), "Expected status code 200 but got " + response.statusCode());
     }
@@ -83,10 +72,6 @@ public class ApiTest_eventsTypes {
                 .queryParam("apiKey", API_KEY) // Pass the API key as a query parameter
                 .when()
                 .get("/event-types/" + eventTypeId);
-
-        // Print the response for debugging
-        System.out.println("Response Status Code: " + response.statusCode());
-        System.out.println("Response Body: " + response.asString());
 
         // Validate the status code
         assertEquals(200, response.statusCode(), "Expected status code 200 but got " + response.statusCode());
