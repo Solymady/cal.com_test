@@ -1,12 +1,13 @@
 package org.example.pages.team;
 
+import org.apache.commons.io.FileUtils;
 import org.example.pages.EventTypesPage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 
@@ -43,11 +44,26 @@ public class TeamsPage {
 
     // Click the "Add New Team" button
     public boolean clickAddNewTeam() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement addNewTeamButton = wait.until(ExpectedConditions.elementToBeClickable(addNewTeamButtonBy));
-        addNewTeamButton.click();
-        return true;
+        try {
+            // Locate and click the button
+            WebElement newTeamButton = driver.findElement(By.cssSelector("a[data-testid='new-team-btn']"));
+            newTeamButton.click();
+            return true; // Return true if the click was successful
+        } catch (Exception e) {
+            try {
+                // Capture screenshot on failure
+                File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+                File destination = new File("screenshot_error.png");
+                FileUtils.copyFile(screenshot, destination);
+                System.out.println("Screenshot saved to: " + destination.getAbsolutePath());
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            e.printStackTrace();
+            return false; // Return false if an exception occurred
+        }
     }
+
 
 
     public void clickEllipsisButtonForTeam(String teamName) {
