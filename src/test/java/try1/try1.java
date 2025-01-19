@@ -3,9 +3,6 @@ package try1;
 import UI_Testing.TestData;
 import org.example.pages.EventTypesPage;
 import org.example.pages.LoginPage;
-import org.example.pages.team.AddTeamMembersPage;
-import org.example.pages.team.CreateTeamPage;
-import org.example.pages.team.TeamsPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,23 +15,19 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.net.MalformedURLException;
+
 import java.time.Duration;
 
 import static org.example.DriverFactory.getDriver;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class try1 {
     private WebDriver driver;
-    private TeamsPage teamsPage;
-    private EventTypesPage eventTypesPage;
-    private String teamName = "testAddMember";
-    private CreateTeamPage createTeamPage;
-
+    private LoginPage loginPage;
 
     @BeforeEach
-    public void setUp() throws MalformedURLException, InterruptedException {
-        // Initialize WebDriver
+    public void setUp() throws InterruptedException {
         driver = getDriver();
         driver.manage().window().maximize();
         driver.get(TestData.NGROK_BASE_URL);
@@ -47,50 +40,46 @@ public class try1 {
             System.out.println("Ngrok warning page was not loaded");
         }
 
-        // Login
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.loginAsValidUser("solyma.mady@hotmail.co.il", "Admin123456789admin");
-
-        // Navigate to Teams page
-        teamsPage = new TeamsPage(driver);
+        Thread.sleep(1000);
+        loginPage = new LoginPage(driver);
     }
 
     @Test
-    public void testAddNewTeam() throws InterruptedException {
-        // Step 1: Navigate to Teams Page
-        eventTypesPage = new EventTypesPage(driver);
-        eventTypesPage.navigateToTeamsPage();
+    public void testvalidLogin() {
+        EventTypesPage eventTypesPage = loginPage.loginAsValidUser("solyma.mady@hotmail.co.il", "Admin123456789admin");
 
-        // Step 2: Click Add New Team
-        teamsPage = new TeamsPage(driver);
-        teamsPage.clickAddNewTeam();
+        // Wait for login
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement eventTypesHeader = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h3[text()='Event Types']")));
 
-        // Step 3: Create a new team
-        CreateTeamPage createTeamPage = new CreateTeamPage(driver);
-        createTeamPage.setTeamName(teamName);
-        createTeamPage.clickContinue();
-
-        // Step 4: Add team
-        AddTeamMembersPage addTeamMembersPage = new AddTeamMembersPage(driver);
-
-        // Add Member 1
-        addTeamMembersPage.addMember("member1@gmail.com", "Admin");
-        Thread.sleep(1000);
-
+        assertTrue(eventTypesHeader.isDisplayed());
     }
 
 
+    @Test
+    public void testInvalidLogin() {
+        // Perform login with invalid credentials
+        loginPage.loginWithInvalidUser("invalid@example.com", "wrongpassword");
+
+        // Wait for error message to appear
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement errorMessage = wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.xpath("//h3[contains(text(), 'Email or password is incorrect')]")));
+
+        // Verify the error message is displayed
+        assertTrue(errorMessage.isDisplayed(), "Error message is not displayed.");
+
+        // Verify the error message text
+        String actualText = errorMessage.getText();
+        String expectedText = "Email or password is incorrect.";
+        assertEquals(expectedText, actualText);
+    }
+
+
+
     @AfterEach
-    public void tearDown() throws InterruptedException {
-        driver.navigate().back();
-        Thread.sleep(1000);
-        driver.navigate().back();
-        Thread.sleep(1000);
+    public void tearDown() {
         if (driver != null) {
-            Thread.sleep(1000);
-            if(teamsPage.isTeamExists(teamName)){
-                teamsPage.removeTeam(teamName);
-            }
             driver.quit();
         }
     }
