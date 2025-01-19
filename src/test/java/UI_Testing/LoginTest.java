@@ -17,6 +17,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+import static org.example.DriverFactory.getDriver;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -26,7 +27,7 @@ public class LoginTest {
 
     @BeforeEach
     public void setUp() throws InterruptedException {
-        driver = new ChromeDriver();
+        driver = getDriver();
         driver.manage().window().maximize();
         driver.get("https://4ea1-2a06-c701-7aa2-8800-791f-cbd4-812e-6c63.ngrok-free.app");
 
