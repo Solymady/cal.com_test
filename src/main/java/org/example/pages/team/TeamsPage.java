@@ -46,6 +46,7 @@ public class TeamsPage {
     public boolean clickAddNewTeam() {
         try {
             // Locate and click the button
+            Thread.sleep(10000);
             WebElement newTeamButton = driver.findElement(By.cssSelector("a[data-testid='new-team-btn']"));
             newTeamButton.click();
             return true; // Return true if the click was successful
