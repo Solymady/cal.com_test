@@ -1,4 +1,4 @@
-name: cal.com UI_Testing
+name: cal.com try
 
 on:
   workflow_dispatch:
