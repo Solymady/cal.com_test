@@ -98,7 +98,7 @@ public class AddTeamTest {
     }
 
     @AfterEach
-    public void tearDown() {
+    public void tearDown() throws InterruptedException {
         TeamsPage teamsPage=new TeamsPage(driver);
         if (driver != null) {
             if(teamsPage.isTeamExists(teamName)){

@@ -40,7 +40,7 @@ public class ApiTest_eventsTypes{
     public void testValidateApiKey() {
         // Send a simple GET request to validate the API key
         Response response = given().header("Authorization", API_KEY).when()
-                .get("/event-types"); // Adjust endpoint as needed
+                .get("/event-types");
 
         // Validate the status code
         assertEquals(200, response.statusCode(), "Expected status code 200 but got " + response.statusCode());

@@ -91,7 +91,7 @@ public class AddTeamMemberTest {
         if (driver != null) {
             Thread.sleep(1000);
             if(teamsPage.isTeamExists(teamName)){
-                Thread.sleep(1000);
+                Thread.sleep(2000);
                 teamsPage.removeTeam(teamName);
             }
             driver.quit();

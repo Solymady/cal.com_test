@@ -16,14 +16,12 @@ import java.util.Optional;
 public class DriverFactory {
 
     private static final String grid_url = System.getenv("GRID_URL");
+
     private static final String browser = Optional
             .ofNullable(System.getenv("BROWSER"))
             .orElse("chrome");
 
     public static WebDriver getDriver() {
-        System.out.println("Grid URL: " + grid_url);
-        System.out.println("Browser: " + browser);
-
         if (grid_url != null) {
             return getRemoteDriver(browser);
         } else {
@@ -36,35 +34,30 @@ public class DriverFactory {
         try {
             hubUrl = new URI(grid_url).toURL();
         } catch (URISyntaxException | MalformedURLException err) {
-            throw new IllegalArgumentException("Invalid grid URL: " + grid_url, err);
+            throw new IllegalArgumentException("Invalid grid URL");
         }
 
-        switch (browser.toLowerCase()) {
-            case "chrome":
-                ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage");
-                return new RemoteWebDriver(hubUrl, chromeOptions);
-
-            case "firefox":
-                FirefoxOptions firefoxOptions = new FirefoxOptions();
-                firefoxOptions.addArguments("-headless");
-                return new RemoteWebDriver(hubUrl, firefoxOptions);
-
-            default:
-                throw new IllegalArgumentException("Unsupported browser: " + browser);
+        if (browser.equalsIgnoreCase("chrome")) {
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--headless");
+            return new RemoteWebDriver(hubUrl, options);
+        } else if (browser.equalsIgnoreCase("firefox")) {
+            FirefoxOptions options = new FirefoxOptions();
+            options.addArguments("-headless");
+            return new RemoteWebDriver(hubUrl, options);
+        } else {
+            throw new IllegalArgumentException("Unsupported browser: " + browser);
         }
     }
 
     private static WebDriver getLocalDriver(String browser) {
-        switch (browser.toLowerCase()) {
-            case "chrome":
-                return new ChromeDriver();
-
-            case "firefox":
-                return new FirefoxDriver();
-
-            default:
-                throw new IllegalArgumentException("Unsupported browser: " + browser);
+        if (browser.equalsIgnoreCase("chrome")) {
+            return new ChromeDriver();
+        } else if (browser.equalsIgnoreCase("firefox")) {
+            return new FirefoxDriver();
+        } else {
+            throw new IllegalArgumentException("Unsupported browser: " + browser);
         }
     }
+
 }
