@@ -10,12 +10,12 @@ on:
         default: http://localhost:4444
 
       chrome_131_0:
-        description: 'Chrome (131.0)'
+        description: 'Run tests on Chrome (131.0)'
         required: false
         type: boolean
 
       firefox_133_0:
-        description: 'Firefox (133.0)'
+        description: 'Run tests on Firefox (133.0)'
         required: false
         type: boolean
 
@@ -39,15 +39,27 @@ jobs:
         run: |
           docker run --name grid_container -d -p 4444:4444 --shm-size=2gb selenium/standalone-chrome:131.0-chromedriver-131.0-grid-4.27.0-20250101
 
-      - name: Run Tests
+      - name: Run Tests on Chrome
         run: |
           export BROWSER=chrome
           export GRID_URL=${{ github.event.inputs.grid_url }}
           
-          mvn test -Dtest=**/UI_Testing/AddTeamMemberTest
-          
-          # Tear down grid if exists
+          # Run Maven tests and save logs
+          mvn test -Dtest=**/UI_Testing/AddTeamMemberTest | tee maven-chrome-log.txt
+
+      - name: Upload artifacts (Chrome)
+        uses: actions/upload-artifact@v3
+        with:
+          name: chrome-artifacts
+          path: |
+            test-results/
+            maven-chrome-log.txt
+
+      - name: Tear down standalone grid
+        if: ${{ contains(github.event.inputs.grid_url, 'localhost') }}
+        run: |
           docker stop grid_container || true
+          docker rm grid_container || true
 
   TestFirefox_133_0:
     name: Test Firefox 133.0
@@ -68,12 +80,24 @@ jobs:
         run: |
           docker run --name grid_container -d -p 4444:4444 --shm-size=2gb selenium/standalone-firefox:133.0-geckodriver-0.35-grid-4.27.0-20250101
 
-      - name: Run Tests
+      - name: Run Tests on Firefox
         run: |
           export BROWSER=firefox
           export GRID_URL=${{ github.event.inputs.grid_url }}
           
-          mvn test -Dtest=**/UI_Testing/AddTeamMemberTest
-          
-          # Tear down grid if exists
+          # Run Maven tests and save logs
+          mvn test -Dtest=**/UI_Testing/AddTeamMemberTest | tee maven-firefox-log.txt
+
+      - name: Upload artifacts (Firefox)
+        uses: actions/upload-artifact@v3
+        with:
+          name: firefox-artifacts
+          path: |
+            test-results/
+            maven-firefox-log.txt
+
+      - name: Tear down standalone grid
+        if: ${{ contains(github.event.inputs.grid_url, 'localhost') }}
+        run: |
           docker stop grid_container || true
+          docker rm grid_container || true

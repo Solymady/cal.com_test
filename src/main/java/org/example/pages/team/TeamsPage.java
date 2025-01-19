@@ -53,7 +53,7 @@ public class TeamsPage {
             try {
                 // Capture screenshot on failure
                 File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-                File destination = new File("screenshot_error.png");
+                File destination = new File("test-results/screenshots/screenshot_error.png");
                 FileUtils.copyFile(screenshot, destination);
                 System.out.println("Screenshot saved to: " + destination.getAbsolutePath());
             } catch (IOException ioException) {
