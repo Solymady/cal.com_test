@@ -1,5 +1,6 @@
 package try1;
 
+import UI_Testing.TestData;
 import org.example.pages.EventTypesPage;
 import org.example.pages.LoginPage;
 import org.example.pages.team.AddTeamMembersPage;
@@ -29,17 +30,14 @@ public class try1 {
     private EventTypesPage eventTypesPage;
     private String teamName = "testAddMember";
     private CreateTeamPage createTeamPage;
-    AddTeamMembersPage addTeamMembersPage;
 
 
     @BeforeEach
     public void setUp() throws MalformedURLException, InterruptedException {
         // Initialize WebDriver
         driver = getDriver();
-
-
         driver.manage().window().maximize();
-        driver.get("https://397e-2a06-c701-7aa2-8800-e8d6-ed49-b4e-cd59.ngrok-free.app");
+        driver.get(TestData.NGROK_BASE_URL);
 
         try {
             Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -49,49 +47,12 @@ public class try1 {
             System.out.println("Ngrok warning page was not loaded");
         }
 
-
-        eventTypesPage = new EventTypesPage(driver);
-        if (driver != null) {
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        } else {
-            System.out.println("Driver is null");
-        }
-        teamsPage = new TeamsPage(driver);
-        if (driver != null) {
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        } else {
-            System.out.println("Driver is null");
-        }
-        createTeamPage= new CreateTeamPage(driver);
-        if (driver != null) {
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        } else {
-            System.out.println("Driver is null");
-        }
-        addTeamMembersPage= new AddTeamMembersPage(driver);
-        if (driver != null) {
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        } else {
-            System.out.println("Driver is null");
-        }
-
         // Login
         LoginPage loginPage = new LoginPage(driver);
-        if (driver != null) {
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        } else {
-            System.out.println("Driver is null");
-        }
         loginPage.loginAsValidUser("solyma.mady@hotmail.co.il", "Admin123456789admin");
 
         // Navigate to Teams page
         teamsPage = new TeamsPage(driver);
-
-        if (driver != null) {
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        } else {
-            System.out.println("Driver is null");
-        }
     }
 
     @Test
@@ -105,12 +66,12 @@ public class try1 {
         teamsPage.clickAddNewTeam();
 
         // Step 3: Create a new team
-        createTeamPage = new CreateTeamPage(driver);
+        CreateTeamPage createTeamPage = new CreateTeamPage(driver);
         createTeamPage.setTeamName(teamName);
         createTeamPage.clickContinue();
 
         // Step 4: Add team
-        addTeamMembersPage = new AddTeamMembersPage(driver);
+        AddTeamMembersPage addTeamMembersPage = new AddTeamMembersPage(driver);
 
         // Add Member 1
         addTeamMembersPage.addMember("member1@gmail.com", "Admin");
