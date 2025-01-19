@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class RemoveTeamTest {
     private WebDriver driver;
     private LoginPage loginPage;
-    private String removeTeam ="removeTeam";
+
 
     @BeforeEach
     public void setUp() throws InterruptedException {
@@ -54,7 +54,7 @@ public class RemoveTeamTest {
         Thread.sleep(1000);
         TeamsPage teamsPage=new TeamsPage(driver);
         Thread.sleep(1000);
-        teamsPage.addTeam(removeTeam);
+        teamsPage.addTeam(TestData.REMOVE_TEAM_NAME);
     }
 
 
@@ -66,9 +66,9 @@ public class RemoveTeamTest {
         //remove team
         TeamsPage teamsPage=new TeamsPage(driver);
         Thread.sleep(1000);
-        teamsPage.removeTeam(removeTeam);
+        teamsPage.removeTeam(TestData.REMOVE_TEAM_NAME);
         Thread.sleep(1000);
-        assertTrue(!teamsPage.isTeamExists(removeTeam));
+        assertTrue(!teamsPage.isTeamExists(TestData.REMOVE_TEAM_NAME));
     }
 
     @AfterEach

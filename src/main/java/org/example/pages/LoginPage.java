@@ -16,7 +16,7 @@ public class LoginPage {
     private By passwordField = By.id("password");
     private By loginButton = By.cssSelector("button[type='submit']");
     private By errorMessageBy = By.xpath("//h3[text()='Email or password is incorrect.']"); // Locator for error message
-
+    private By EventTypePage= By.xpath("//h3[text()='Event Types']");
 
     // Constructor
     public LoginPage(WebDriver driver) {
@@ -53,6 +53,8 @@ public class LoginPage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.urlContains("/event-types"));
 
+        wait.until(ExpectedConditions.presenceOfElementLocated(EventTypePage));
+
         // Return a new EventTypesPage object if successfully navigated
         return new EventTypesPage(driver);
     }
@@ -69,16 +71,10 @@ public class LoginPage {
 
     // Check if the error message is displayed
     public boolean isErrorMessageDisplayed() {
-        return driver.findElement(errorMessageBy).isDisplayed();
-    }
-
-    // Get the text of the error message
-    public String getErrorMessageText() {
-        return driver.findElement(errorMessageBy).getText();
+        // Wait for the error message to appear and return true if found
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        return wait.until(ExpectedConditions.presenceOfElementLocated(errorMessageBy)).isDisplayed();
     }
 
 
-    public void clickLogin() {
-        driver.findElement(loginButton).click();
-    }
 }
