@@ -45,7 +45,7 @@ jobs:
           export GRID_URL=${{ github.event.inputs.grid_url }}
           
           # Run Maven tests and save logs
-          mvn test -Dtest=**/UI_Testing/AddTeamMemberTest | tee maven-chrome-log.txt
+          mvn test -Dtest=**/UI_Testing/AddTeamMemberTest 
 
       - name: Upload artifacts (Chrome)
         uses: actions/upload-artifact@v3
@@ -86,7 +86,7 @@ jobs:
           export GRID_URL=${{ github.event.inputs.grid_url }}
           
           # Run Maven tests and save logs
-          mvn test -Dtest=**/UI_Testing/AddTeamMemberTest | tee maven-firefox-log.txt
+          mvn test -Dtest=**/UI_Testing/AddTeamMemberTest
 
       - name: Upload artifacts (Firefox)
         uses: actions/upload-artifact@v3
