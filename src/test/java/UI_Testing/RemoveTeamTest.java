@@ -27,7 +27,7 @@ public class RemoveTeamTest {
     private String removeTeam ="removeTeam";
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws InterruptedException {
         // Initialize WebDriver
         driver = getDriver();
         driver.manage().window().maximize();
@@ -46,10 +46,14 @@ public class RemoveTeamTest {
         // Login
         LoginPage loginPage = new LoginPage(driver);
         loginPage.loginAsValidUser("solyma.mady@hotmail.co.il", "Admin123456789admin");
+        Thread.sleep(1000);
 
         EventTypesPage eventTypesPage = new EventTypesPage(driver);
+        Thread.sleep(1000);
         eventTypesPage.navigateToTeamsPage();
+        Thread.sleep(1000);
         TeamsPage teamsPage=new TeamsPage(driver);
+        Thread.sleep(1000);
         teamsPage.addTeam(removeTeam);
     }
 
