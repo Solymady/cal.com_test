@@ -1,12 +1,30 @@
 package UI_Testing;
 
+import org.example.pages.EventTypesPage;
+import org.example.pages.LoginPage;
+import org.example.pages.team.AddTeamMembersPage;
+import org.example.pages.team.CreateTeamPage;
+import org.example.pages.team.TeamsPage;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.net.MalformedURLException;
+import java.time.Duration;
+
+import static org.example.DriverFactory.getDriver;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AddTeamMemberTest {
- /*   private WebDriver driver;
+    private WebDriver driver;
     private TeamsPage teamsPage;
     private EventTypesPage eventTypesPage;
     private String teamName = "testAddMember";
@@ -46,7 +64,7 @@ public class AddTeamMemberTest {
 
         // Step 2: Click Add New Team
         teamsPage = new TeamsPage(driver);
-        Thread.sleep(5000);
+        Thread.sleep(1000);
         teamsPage.clickAddNewTeam();
 
         // Step 3: Create a new team
@@ -78,10 +96,5 @@ public class AddTeamMemberTest {
             }
             driver.quit();
         }
-    }*/
-
-    @Test
-    public void testAddNewTeam(){
-        assertTrue(true);
     }
 }
