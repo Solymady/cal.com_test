@@ -3,6 +3,10 @@ package org.example.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class LoginPage {
     private WebDriver driver;
@@ -34,15 +38,25 @@ public class LoginPage {
 
     // Perform login as a valid user
     public EventTypesPage loginAsValidUser(String userName, String password) {
+        // Clear and enter email
         driver.findElement(emailField).clear();
         driver.findElement(emailField).sendKeys(userName);
+
+        // Clear and enter password
         driver.findElement(passwordField).clear();
         driver.findElement(passwordField).sendKeys(password);
+
+        // Click the login button
         driver.findElement(loginButton).click();
 
-        // Navigate to the Event Types page on successful login
+        // Explicitly wait for the Event Types page to load
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.urlContains("/event-types"));
+
+        // Return a new EventTypesPage object if successfully navigated
         return new EventTypesPage(driver);
     }
+
 
     public LoginPage loginWithInvalidUser(String userName, String password) {
         driver.findElement(emailField).clear();

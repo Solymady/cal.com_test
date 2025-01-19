@@ -1,4 +1,4 @@
-package com.example.project.constants;
+package UI_Testing;
 
 public class TestData {
 
@@ -9,7 +9,7 @@ public class TestData {
     public static final String LOCAL_TEAMS_ENDPOINT = LOCAL_BASE_URL + "/teams";
 
     // Ngrok URLs
-    public static final String NGROK_BASE_URL = "https://example.ngrok.io";
+    public static final String NGROK_BASE_URL = "https://4ea1-2a06-c701-7aa2-8800-791f-cbd4-812e-6c63.ngrok-free.app";
     public static final String NGROK_LOGIN_ENDPOINT = NGROK_BASE_URL + "/auth/login";
     public static final String NGROK_EVENT_ENDPOINT = NGROK_BASE_URL + "/event-types";
     public static final String NGROK_TEAMS_ENDPOINT = NGROK_BASE_URL + "/teams";
@@ -19,12 +19,12 @@ public class TestData {
     public static final String API_KEY ="cal_live_2725c576aa5eb86fbfc552fa289b916e";
 
     //Login test valid data
-    public static final String VALID_EMAIL ="solyma.mady@hotmail.co.il"
-    public static final String VALID_PASSWORD = "Admin123456789admin"
+    public static final String VALID_EMAIL ="solyma.mady@hotmail.co.il";
+    public static final String VALID_PASSWORD = "Admin123456789admin";
 
     //Login test Invalid data
-    public static final String INVALID_EMAIL = "invalid@example.com"
-    public static final String INVALID_PASSWORD = "wrongpassword"
+    public static final String INVALID_EMAIL = "invalid@example.com";
+    public static final String INVALID_PASSWORD = "wrongpassword";
 
 
     // Add Test Data

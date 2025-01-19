@@ -28,6 +28,7 @@ public class AddTeamMemberTest {
     private TeamsPage teamsPage;
     private EventTypesPage eventTypesPage;
     private String teamName = "testAddMember";
+    private CreateTeamPage createTeamPage;
 
 
     @BeforeEach
@@ -35,7 +36,7 @@ public class AddTeamMemberTest {
         // Initialize WebDriver
         driver = getDriver();
         driver.manage().window().maximize();
-        driver.get("https://397e-2a06-c701-7aa2-8800-e8d6-ed49-b4e-cd59.ngrok-free.app");
+        driver.get(TestData.NGROK_BASE_URL);
 
         try {
             Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -56,11 +57,11 @@ public class AddTeamMemberTest {
     @Test
     public void testAddNewTeam() throws InterruptedException {
         // Step 1: Navigate to Teams Page
-        EventTypesPage eventTypesPage = new EventTypesPage(driver);
+        eventTypesPage = new EventTypesPage(driver);
         eventTypesPage.navigateToTeamsPage();
 
         // Step 2: Click Add New Team
-        TeamsPage teamsPage = new TeamsPage(driver);
+        teamsPage = new TeamsPage(driver);
         teamsPage.clickAddNewTeam();
 
         // Step 3: Create a new team

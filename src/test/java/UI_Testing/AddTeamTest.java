@@ -35,7 +35,7 @@ public class AddTeamTest {
         // Initialize WebDriver
         driver = getDriver();
         driver.manage().window().maximize();
-        driver.get("https://397e-2a06-c701-7aa2-8800-e8d6-ed49-b4e-cd59.ngrok-free.app");
+        driver.get(TestData.NGROK_BASE_URL);
 
         try {
             Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));

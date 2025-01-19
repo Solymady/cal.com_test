@@ -17,7 +17,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-import static org.example.DriverFactory.getDriver;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -26,11 +25,10 @@ public class LoginTest {
     private LoginPage loginPage;
 
     @BeforeEach
-    public void setUp() {
-        // Initialize WebDriver
-        driver = getDriver();
+    public void setUp() throws InterruptedException {
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get("https://397e-2a06-c701-7aa2-8800-e8d6-ed49-b4e-cd59.ngrok-free.app");
+        driver.get("https://4ea1-2a06-c701-7aa2-8800-791f-cbd4-812e-6c63.ngrok-free.app");
 
         try {
             Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -40,11 +38,12 @@ public class LoginTest {
             System.out.println("Ngrok warning page was not loaded");
         }
 
+        Thread.sleep(1000);
         loginPage = new LoginPage(driver);
     }
 
     @Test
-    public void testEventTypesPageHeader() {
+    public void testvalidLogin() {
         EventTypesPage eventTypesPage = loginPage.loginAsValidUser("solyma.mady@hotmail.co.il", "Admin123456789admin");
 
         // Wait for login

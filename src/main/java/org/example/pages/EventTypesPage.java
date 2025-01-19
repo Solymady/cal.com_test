@@ -22,7 +22,6 @@ public class EventTypesPage {
 
     // Constructor
     public EventTypesPage(WebDriver driver) {
-
         this.driver = driver;
     }
 

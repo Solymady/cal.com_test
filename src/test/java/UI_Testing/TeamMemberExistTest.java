@@ -37,7 +37,7 @@ public class TeamMemberExistTest {
         // Initialize WebDriver
         driver = getDriver();
         driver.manage().window().maximize();
-        driver.get("https://397e-2a06-c701-7aa2-8800-e8d6-ed49-b4e-cd59.ngrok-free.app");
+        driver.get(TestData.NGROK_BASE_URL);
 
         try {
             Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -76,7 +76,7 @@ public class TeamMemberExistTest {
         // Add Member 1
         addTeamMembersPage.addMember("member1@gmail.com", "Admin");
         // Add Member 1
-        addTeamMembersPage.addMember("member1@gmail.com", "member");
+        addTeamMembersPage.addMember("member1@gmail.com", "Member");
         Thread.sleep(1000);
         String actualMessage=addTeamMembersPage.getErrorMessageForExistTeamMember();
 
