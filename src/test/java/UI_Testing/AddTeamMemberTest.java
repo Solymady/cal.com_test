@@ -52,16 +52,19 @@ public class AddTeamMemberTest {
 
         // Navigate to Teams page
         teamsPage = new TeamsPage(driver);
+        Thread.sleep(5000);
     }
 
     @Test
     public void testAddNewTeam() throws InterruptedException {
         // Step 1: Navigate to Teams Page
         eventTypesPage = new EventTypesPage(driver);
+        Thread.sleep(5000);
         eventTypesPage.navigateToTeamsPage();
 
         // Step 2: Click Add New Team
         teamsPage = new TeamsPage(driver);
+        Thread.sleep(5000);
         teamsPage.clickAddNewTeam();
 
         // Step 3: Create a new team
@@ -88,6 +91,7 @@ public class AddTeamMemberTest {
         if (driver != null) {
             Thread.sleep(1000);
             if(teamsPage.isTeamExists(teamName)){
+                Thread.sleep(1000);
                 teamsPage.removeTeam(teamName);
             }
             driver.quit();
