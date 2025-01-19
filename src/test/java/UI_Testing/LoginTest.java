@@ -29,7 +29,7 @@ public class LoginTest {
     public void setUp() throws InterruptedException {
         driver = getDriver();
         driver.manage().window().maximize();
-        driver.get("https://4ea1-2a06-c701-7aa2-8800-791f-cbd4-812e-6c63.ngrok-free.app");
+        driver.get(TestData.NGROK_BASE_URL);
 
         try {
             Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));

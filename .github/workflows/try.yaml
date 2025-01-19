@@ -1,4 +1,4 @@
-name: cal.com try
+name: cal.com Login Test
 
 on:
   workflow_dispatch:
