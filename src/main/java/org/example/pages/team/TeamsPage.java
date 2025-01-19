@@ -14,7 +14,7 @@ public class TeamsPage {
     private WebDriver driver;
 
     // Locators
-    private By addNewTeamButtonBy = By.xpath("//a[contains(@class, 'bg-brand-default') and @data-testid='new-team-btn']");
+    private By addNewTeamButtonBy = By.xpath("//a[@data-testid=\"new-team-btn\"]");
     private By teamListBy = By.xpath("//div[contains(@class, 'team-list-item')]");
     private By disbandTeamBy = By.xpath("//div[@role='menuitem']//div[text()='Disband Team']");
     private By confirmButtonBy = By.xpath("//button[@data-testid='dialog-confirmation']");
