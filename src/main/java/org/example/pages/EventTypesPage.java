@@ -24,19 +24,19 @@ public class EventTypesPage {
     // Constructor with page validation
     public EventTypesPage(WebDriver driver) {
         this.driver = driver;
+        if(isEventTypesPageDisplayed()){
+            System.out.println("in event page");
+        }else{
+            System.out.println("in event page");
+        }
     }
 
-    // Private method to verify if on the EventTypesPage
     private boolean isOnEventTypesPage() {
-        try {
-            // Locate the header element
-            WebElement header = driver.findElement(pageHeaderBy);
-            // Validate header text
-            return header.getText().equals("Event Types"); // Replace with actual header text
-        } catch (Exception e) {
-            // Return false if header is not found
-            return false;
-        }
+        // Locate the header element
+        WebElement header = driver.findElement(pageHeaderBy);
+
+        // Validate header text
+        return header.getText().equals("Event Types"); // Replace with actual header text
     }
 
     // Verify if the Event Types page is displayed

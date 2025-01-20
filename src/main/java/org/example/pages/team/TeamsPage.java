@@ -131,6 +131,7 @@ public class TeamsPage {
         addNewTeamEvent.clickdoLaterButton();
         TeamProfile teamProfile=new TeamProfile(driver);
         teamProfile.clickBackButton();
+        Thread.sleep(2000);
     }
 
 
