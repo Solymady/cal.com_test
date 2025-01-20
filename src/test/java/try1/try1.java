@@ -18,6 +18,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+
 import static org.example.DriverFactory.getDriver;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -45,13 +46,11 @@ public class try1 {
     }
 
     @Test
-    public void testvalidLogin() {
-        EventTypesPage eventTypesPage = loginPage.loginAsValidUser("solyma.mady@hotmail.co.il", "Admin123456789admin");
-
+    public void testvalidLogin() throws InterruptedException {
+        EventTypesPage eventTypesPage = loginPage.loginAsValidUser(TestData.VALID_EMAIL, TestData.VALID_PASSWORD);
         // Wait for login
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement eventTypesHeader = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h3[text()='Event Types']")));
-
         assertTrue(eventTypesHeader.isDisplayed());
     }
 
@@ -59,20 +58,9 @@ public class try1 {
     @Test
     public void testInvalidLogin() {
         // Perform login with invalid credentials
-        loginPage.loginWithInvalidUser("invalid@example.com", "wrongpassword");
-
-        // Wait for error message to appear
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement errorMessage = wait.until(ExpectedConditions.presenceOfElementLocated(
-                By.xpath("//h3[contains(text(), 'Email or password is incorrect')]")));
-
-        // Verify the error message is displayed
-        assertTrue(errorMessage.isDisplayed(), "Error message is not displayed.");
-
-        // Verify the error message text
-        String actualText = errorMessage.getText();
-        String expectedText = "Email or password is incorrect.";
-        assertEquals(expectedText, actualText);
+        loginPage.loginWithInvalidUser(TestData.INVALID_EMAIL, TestData.INVALID_PASSWORD);
+        //LoginPage loginPage = new LoginPage(driver);
+        assertTrue(loginPage.isErrorMessageDisplayed());
     }
 
 
