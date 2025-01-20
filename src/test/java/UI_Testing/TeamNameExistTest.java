@@ -66,7 +66,7 @@ public class TeamNameExistTest {
         CreateTeamPage createTeamPage = new CreateTeamPage(driver);
         createTeamPage.setTeamName(testExist);
         createTeamPage.clickContinue();
-        assertEquals("Member has already been invited",createTeamPage.getErrorMessageForExistTeamTitle());
+        assertEquals("This URL is already taken",createTeamPage.getErrorMessageForExistTeamTitle());
     }
 
     @AfterEach

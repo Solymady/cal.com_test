@@ -75,9 +75,9 @@ public class TeamMemberExistTest {
 
         // Add Member 1
         addTeamMembersPage.addMember("member1@gmail.com", "Admin");
+        Thread.sleep(1000);
         // Add Member 1
         addTeamMembersPage.addMember("member1@gmail.com", "Member");
-        Thread.sleep(1000);
         String actualMessage=addTeamMembersPage.getErrorMessageForExistTeamMember();
 
         // Assert that the actual message matches the expected

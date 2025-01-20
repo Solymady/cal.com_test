@@ -102,9 +102,10 @@ public class AddTeamMembersPage {
     }
 
     // Click "Continue" button to proceed
-    public void clickContinue() {
+    public void clickContinue() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement continueButton = wait.until(ExpectedConditions.elementToBeClickable(continueButtonBy));
+        Thread.sleep(1000);
         continueButton.click();
     }
 
