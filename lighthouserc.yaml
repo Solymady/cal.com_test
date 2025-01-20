@@ -1,0 +1,8 @@
+# lighthouse.md
+
+ci:
+collect:
+url:
+        - https://8060-2a06-c701-7aa2-8800-791f-cbd4-812e-6c63.ngrok-free.app  # change to your app url pages you want to test
+upload:
+target: temporary-public-storage
