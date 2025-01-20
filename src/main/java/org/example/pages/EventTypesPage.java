@@ -20,9 +20,29 @@ public class EventTypesPage {
     // URLs
     private String teamsPageUrl = "/teams";
 
-    // Constructor
+
+    // Constructor with page validation
     public EventTypesPage(WebDriver driver) {
         this.driver = driver;
+
+        // Check if on EventTypesPage by header
+        if (!isOnEventTypesPage()) {
+            System.out.println("This is not the Event Types page.");
+            throw new IllegalStateException("This is not the Event Types page.");
+        }
+    }
+
+    // Private method to verify if on the EventTypesPage
+    private boolean isOnEventTypesPage() {
+        try {
+            // Locate the header element
+            WebElement header = driver.findElement(pageHeaderBy);
+            // Validate header text
+            return header.getText().equals("Event Types"); // Replace with actual header text
+        } catch (Exception e) {
+            // Return false if header is not found
+            return false;
+        }
     }
 
     // Verify if the Event Types page is displayed
