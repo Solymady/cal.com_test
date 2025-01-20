@@ -24,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class RemoveTeamTest {
     private WebDriver driver;
     private LoginPage loginPage;
+    private EventTypesPage eventTypesPage;
 
 
     @BeforeEach
@@ -32,6 +33,7 @@ public class RemoveTeamTest {
         driver = getDriver();
         driver.manage().window().maximize();
         driver.get(TestData.NGROK_BASE_URL);
+
 
         try {
             Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));

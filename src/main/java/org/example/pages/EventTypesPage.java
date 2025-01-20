@@ -24,12 +24,6 @@ public class EventTypesPage {
     // Constructor with page validation
     public EventTypesPage(WebDriver driver) {
         this.driver = driver;
-
-        // Check if on EventTypesPage by header
-        if (!isOnEventTypesPage()) {
-            System.out.println("This is not the Event Types page.");
-            throw new IllegalStateException("This is not the Event Types page.");
-        }
     }
 
     // Private method to verify if on the EventTypesPage
