@@ -34,7 +34,6 @@ public class EventTypesPage {
     private boolean isOnEventTypesPage() {
         // Locate the header element
         WebElement header = driver.findElement(pageHeaderBy);
-
         // Validate header text
         return header.getText().equals("Event Types"); // Replace with actual header text
     }

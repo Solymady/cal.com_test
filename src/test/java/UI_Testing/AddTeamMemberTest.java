@@ -94,6 +94,7 @@ public class AddTeamMemberTest {
                 Thread.sleep(2000);
                 teamsPage.removeTeam(teamName);
             }
+            Thread.sleep(2000);
             driver.quit();
         }
     }

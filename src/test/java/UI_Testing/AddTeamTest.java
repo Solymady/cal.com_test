@@ -67,7 +67,7 @@ public class AddTeamTest {
         CreateTeamPage createTeamPage = new CreateTeamPage(driver);
         createTeamPage.setTeamName(teamName);
         createTeamPage.clickContinue();
-
+        Thread.sleep(1000);
         // Step 4: Add team members
         AddTeamMembersPage addTeamMembersPage = new AddTeamMembersPage(driver);
 
@@ -104,6 +104,7 @@ public class AddTeamTest {
             if(teamsPage.isTeamExists(teamName)){
                 teamsPage.removeTeam(teamName);
             }
+            Thread.sleep(2000);
             driver.quit();
         }
     }

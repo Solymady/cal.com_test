@@ -124,6 +124,7 @@ public class AddTeamMembersPage {
         enterEmail(email);
         selectRole(role);
         clickSendInvite();
+        Thread.sleep(1000);
     }
 
 

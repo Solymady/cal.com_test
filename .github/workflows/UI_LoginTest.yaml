@@ -1,5 +1,4 @@
 name: UI_LoginTest
-
 on:
   workflow_dispatch:
     inputs:
@@ -44,7 +43,7 @@ jobs:
           export BROWSER=chrome
           export GRID_URL=${{ github.event.inputs.grid_url }}
           
-          mvn test -Dtest=**/UI_Testing/LoginTest
+           mvn test -Dtest=**/try1/*
           
           # Tear down grid if exists
           docker stop grid_container || true
@@ -73,7 +72,7 @@ jobs:
           export BROWSER=firefox
           export GRID_URL=${{ github.event.inputs.grid_url }}
           
-          mvn test -Dtest=**/UI_Testing/LoginTest
+          mvn test -Dtest=**/try1/*
           
           # Tear down grid if exists
           docker stop grid_container || true

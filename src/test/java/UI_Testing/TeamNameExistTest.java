@@ -77,6 +77,7 @@ public class TeamNameExistTest {
             TeamsPage teamsPage=new TeamsPage(driver);
             Thread.sleep(1000);
             teamsPage.removeTeam(testExist);
+            Thread.sleep(2000);
             driver.quit();
         }
     }

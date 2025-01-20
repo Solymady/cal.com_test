@@ -96,6 +96,7 @@ public class TeamMemberExistTest {
             if(teamsPage.isTeamExists(teamName)){
                 teamsPage.removeTeam(teamName);
             }
+            Thread.sleep(2000);
             driver.quit();
         }
     }
