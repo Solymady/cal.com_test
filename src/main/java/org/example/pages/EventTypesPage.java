@@ -15,7 +15,7 @@ public class EventTypesPage {
 
     private By pageHeaderBy = By.xpath("//h3[text()='Event Types']");
     private By createEventButtonBy = By.id("create-event");
-    private By teamsLinkBy = By.cssSelector("[data-test-id='teams']");
+    private By teamsLinkBy = By.cssSelector("a[data-test-id=\"teams\"][aria-label=\"Teams\"][href=\"/teams\"]");
 
     // URLs
     private String teamsPageUrl = "/teams";
