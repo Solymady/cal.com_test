@@ -41,7 +41,8 @@ public class EventTypesPage {
     }
 
     // Navigate to the Teams page
-    public TeamsPage navigateToTeamsPage() {
+    public TeamsPage navigateToTeamsPage() throws InterruptedException {
+        Thread.sleep(5000);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement teamsLink = wait.until(ExpectedConditions.elementToBeClickable(teamsLinkBy));
         teamsLink.click();
