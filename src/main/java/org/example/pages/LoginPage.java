@@ -37,7 +37,7 @@ public class LoginPage {
     }
 
     // Perform login as a valid user
-    public EventTypesPage loginAsValidUser(String userName, String password) {
+    public EventTypesPage loginAsValidUser(String userName, String password) throws InterruptedException {
         // Clear and enter email
         driver.findElement(emailField).clear();
         driver.findElement(emailField).sendKeys(userName);

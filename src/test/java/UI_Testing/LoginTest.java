@@ -45,7 +45,7 @@ public class LoginTest {
     }
 
     @Test
-    public void testvalidLogin() {
+    public void testvalidLogin() throws InterruptedException {
         EventTypesPage eventTypesPage = loginPage.loginAsValidUser(TestData.VALID_EMAIL, TestData.VALID_PASSWORD);
         // Wait for login
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
