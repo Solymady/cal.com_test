@@ -47,7 +47,7 @@ public class AddTeamTest {
 
         // Login
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.loginAsValidUser("solyma.mady@hotmail.co.il", "Admin123456789admin");
+        loginPage.loginAsValidUser(TestData.VALID_EMAIL, TestData.VALID_PASSWORD);
 
         // Navigate to Teams page
         teamsPage = new TeamsPage(driver);
@@ -93,8 +93,6 @@ public class AddTeamTest {
 
         //Step 8 : Check if team exists
         assertTrue(teamsPage.isTeamExists(teamName));
-
-
     }
 
     @AfterEach

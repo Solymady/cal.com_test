@@ -26,11 +26,6 @@ public class TeamsPage {
     // Constructor
     public TeamsPage(WebDriver driver) {
         this.driver = driver;
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//        WebElement headerElement = wait.until(ExpectedConditions.visibilityOfElementLocated(pageHeaderBy));
-//        if (!headerElement.isDisplayed()) {
-//            throw new IllegalStateException("This is not the Teams page. Current URL: " + driver.getCurrentUrl());
-//        }
     }
 
     // Verify if the Teams page is displayed
@@ -63,38 +58,30 @@ public class TeamsPage {
         // Click the ellipsis button
         ellipsisButton.click();
     }
-
     // Check if team exists in any <ul> on the page
     public boolean isTeamExists(String expectedText) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        try {
-            // Wait for all <ul> elements to be visible
-            List<WebElement> ulElements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.tagName("ul")));
+        // Wait for all <ul> elements to be visible
+        List<WebElement> ulElements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.tagName("ul")));
 
-            // Iterate through each <ul>
-            for (WebElement ul : ulElements) {
-                // Locate all <li> elements within the current <ul>
-                List<WebElement> liElements = ul.findElements(By.tagName("li"));
+        // Iterate through each <ul>
+        for (WebElement ul : ulElements) {
+            // Locate all <li> elements within the current <ul>
+            List<WebElement> liElements = ul.findElements(By.tagName("li"));
 
-                // Iterate through each <li>
-                for (WebElement li : liElements) {
-                    // Check if the <li> contains a <span> with the desired class and text
-                    List<WebElement> spanElements = li.findElements(By.cssSelector("span.text-default.text-sm.font-bold"));
+            // Iterate through each <li>
+            for (WebElement li : liElements) {
+                // Check if the <li> contains a <span> with the desired class and text
+                List<WebElement> spanElements = li.findElements(By.cssSelector("span.text-default.text-sm.font-bold"));
 
-                    // If the <span> exists, check its text
-                    if (!spanElements.isEmpty() && spanElements.get(0).getText().equals(expectedText)) {
-                        System.out.println("Found matching team: " + expectedText);
-                        return true; // Return true if a match is found
-                    }
+                // If the <span> exists, check its text
+                if (!spanElements.isEmpty() && spanElements.get(0).getText().equals(expectedText)) {
+                    return true; // Return true if a match is found
                 }
             }
-        } catch (Exception e) {
-            System.out.println("No <ul> elements found on the page.");
         }
-
-        System.out.println("No matching team found: " + expectedText);
-        return false; // Return false if no match is found or no <ul>/<li> elements exist
+        return false; // Return false if no match is found
     }
 
 
@@ -105,13 +92,9 @@ public class TeamsPage {
         if (isTeamExists) {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             clickEllipsisButtonForTeam(name);
-
-
             WebElement disbandButton = wait.until(ExpectedConditions.elementToBeClickable(disbandTeamBy));
             Thread.sleep(1000);
             disbandButton.click();
-
-
             WebElement confirmButton = wait.until(ExpectedConditions.elementToBeClickable(confirmButtonBy));
             Thread.sleep(1000);
             confirmButton.click();

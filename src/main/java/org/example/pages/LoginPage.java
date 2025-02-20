@@ -52,7 +52,6 @@ public class LoginPage {
         // Explicitly wait for the Event Types page to load
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.urlContains("/event-types"));
-
         wait.until(ExpectedConditions.presenceOfElementLocated(EventTypePage));
 
         // Return a new EventTypesPage object if successfully navigated

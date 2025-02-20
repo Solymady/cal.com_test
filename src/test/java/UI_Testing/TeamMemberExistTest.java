@@ -56,7 +56,7 @@ public class TeamMemberExistTest {
     }
 
     @Test
-    public void testAddNewTeam() throws InterruptedException {
+    public void testTeamMemberExist() throws InterruptedException {
         // Step 1: Navigate to Teams Page
         EventTypesPage eventTypesPage = new EventTypesPage(driver);
         eventTypesPage.navigateToTeamsPage();

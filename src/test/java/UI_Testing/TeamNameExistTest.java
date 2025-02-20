@@ -25,7 +25,6 @@ public class TeamNameExistTest {
 
     private WebDriver driver;
     private LoginPage loginPage;
-    private String testExist = "testExist";
 
     @BeforeEach
     public void setUp() throws InterruptedException {
@@ -44,12 +43,12 @@ public class TeamNameExistTest {
 
         // Login
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.loginAsValidUser("solyma.mady@hotmail.co.il", "Admin123456789admin");
+        loginPage.loginAsValidUser(TestData.VALID_EMAIL, TestData.VALID_PASSWORD);
 
         EventTypesPage eventTypesPage = new EventTypesPage(driver);
         eventTypesPage.navigateToTeamsPage();
         TeamsPage teamsPage=new TeamsPage(driver);
-        teamsPage.addTeam(testExist);
+        teamsPage.addTeam(TestData.EXIST_TEAM_NAME);
     }
 
     @Test
@@ -64,9 +63,9 @@ public class TeamNameExistTest {
 
         // Step 3: Create a new team
         CreateTeamPage createTeamPage = new CreateTeamPage(driver);
-        createTeamPage.setTeamName(testExist);
+        createTeamPage.setTeamName(TestData.EXIST_TEAM_NAME);
         createTeamPage.clickContinue();
-        assertEquals("This URL is already taken",createTeamPage.getErrorMessageForExistTeamTitle());
+        assertEquals(TestData.EXIST_TEAM_NAME_ERROR_MESSAGE,createTeamPage.getErrorMessageForExistTeamTitle());
     }
 
     @AfterEach
@@ -76,7 +75,7 @@ public class TeamNameExistTest {
             createTeamPage.clickCancel();
             TeamsPage teamsPage=new TeamsPage(driver);
             Thread.sleep(1000);
-            teamsPage.removeTeam(testExist);
+            teamsPage.removeTeam(TestData.EXIST_TEAM_NAME);
             Thread.sleep(2000);
             driver.quit();
         }

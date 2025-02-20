@@ -19,6 +19,7 @@ public class AddNewTeamEvent {
 
     // Constructor
     public AddNewTeamEvent(WebDriver driver) {
+
         this.driver = driver;
     }
 
@@ -40,7 +41,6 @@ public class AddNewTeamEvent {
         // Wait for the button to be clickable and click it
         WebElement button = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
         button.click();
-        System.out.println("Selected event type: " + eventType);
     }
 
     // Method to press the finish button
@@ -48,7 +48,6 @@ public class AddNewTeamEvent {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement finishButton = wait.until(ExpectedConditions.elementToBeClickable(finishButtonBy));
         finishButton.click();
-        System.out.println("Finish button clicked successfully.");
     }
 
     // Method to press the "I'll do this later" button
@@ -56,7 +55,6 @@ public class AddNewTeamEvent {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement handleLaterButton = wait.until(ExpectedConditions.elementToBeClickable(handledoButtonBy));
         handleLaterButton.click();
-        System.out.println("Handle later button clicked successfully.");
     }
 
     public void fillNewTeamEvent(String EventTitle, String EventType){

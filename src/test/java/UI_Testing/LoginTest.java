@@ -50,6 +50,7 @@ public class LoginTest {
         // Wait for login
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement eventTypesHeader = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h3[text()='Event Types']")));
+        Thread.sleep(5000);
         assertTrue(eventTypesHeader.isDisplayed());
     }
 

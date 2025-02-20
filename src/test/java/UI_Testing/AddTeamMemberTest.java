@@ -48,18 +48,18 @@ public class AddTeamMemberTest {
 
         // Login
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.loginAsValidUser("solyma.mady@hotmail.co.il", "Admin123456789admin");
+        loginPage.loginAsValidUser(TestData.VALID_EMAIL, TestData.VALID_PASSWORD);
 
         // Navigate to Teams page
         teamsPage = new TeamsPage(driver);
-        Thread.sleep(5000);
+        Thread.sleep(1000);
     }
 
     @Test
-    public void testAddNewTeam() throws InterruptedException {
+    public void testAddTeamMember() throws InterruptedException {
         // Step 1: Navigate to Teams Page
         eventTypesPage = new EventTypesPage(driver);
-        Thread.sleep(5000);
+        Thread.sleep(1000);
         eventTypesPage.navigateToTeamsPage();
 
         // Step 2: Click Add New Team
@@ -72,11 +72,11 @@ public class AddTeamMemberTest {
         createTeamPage.setTeamName(teamName);
         createTeamPage.clickContinue();
 
-        // Step 4: Add team
+        // Step 4: Add team name
         AddTeamMembersPage addTeamMembersPage = new AddTeamMembersPage(driver);
 
         // Add Member 1
-        addTeamMembersPage.addMember("member1@gmail.com", "Admin");
+        addTeamMembersPage.addMember(TestData.MEMBER1_EMAIL, TestData.MEMBER1_ROLE);
         Thread.sleep(1000);
 
     }

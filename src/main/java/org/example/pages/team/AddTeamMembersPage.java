@@ -113,9 +113,7 @@ public class AddTeamMembersPage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         WebElement addTeamMemberButton = wait.until(ExpectedConditions.elementToBeClickable(addTeamMemberButtonBy));
         WebElement hoverable = driver.findElement(addTeamMemberButtonBy);
-        new Actions(driver)
-                .moveToElement(hoverable)
-                .click(hoverable).perform();
+        new Actions(driver).moveToElement(hoverable).click(hoverable).perform();
     }
 
     public void addMember(String email,String role) throws InterruptedException {

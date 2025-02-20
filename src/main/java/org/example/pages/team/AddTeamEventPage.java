@@ -34,26 +34,31 @@ public class AddTeamEventPage {
 
 
     public void selectCollectiveOption() {
+
         driver.findElement(collectiveOptionBy).click();
     }
 
     // Select the "Round Robin" assignment option
     public void selectRoundRobinOption() {
+
         driver.findElement(roundRobinOptionBy).click();
     }
 
     // Select the "Managed Event" assignment option
     public void selectManagedEventOption() {
+
         driver.findElement(managedEventOptionBy).click();
     }
 
     // Click the "Finish" button
     public void clickFinish() {
+
         driver.findElement(finishButtonBy).click();
     }
 
     // Click the "I'll do this later" button
     public void clickDoThisLater() {
+
         driver.findElement(doThisLaterButtonBy).click();
     }
 

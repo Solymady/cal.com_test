@@ -14,6 +14,7 @@ public class TeamProfile {
     By backButtonBy = By.xpath("//p[@class='min-h-4 max-w-36 truncate' and text()='Back']");
 
     public TeamProfile(WebDriver driver) {
+
         this.driver = driver;
     }
 
@@ -21,6 +22,5 @@ public class TeamProfile {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement backButton = wait.until(ExpectedConditions.elementToBeClickable(backButtonBy));
         backButton.click();
-        System.out.println("Back button clicked successfully.");
     }
 }

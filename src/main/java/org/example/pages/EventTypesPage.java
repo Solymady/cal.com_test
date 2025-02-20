@@ -22,12 +22,13 @@ public class EventTypesPage {
 
 
     // Constructor with page validation
-    public EventTypesPage(WebDriver driver) {
+    public EventTypesPage(WebDriver driver) throws InterruptedException {
         this.driver = driver;
+        Thread.sleep(3000);
         if(isEventTypesPageDisplayed()){
             System.out.println("in event page");
         }else{
-            System.out.println("in event page");
+            System.out.println("not in event page");
         }
     }
 
